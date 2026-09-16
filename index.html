@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Housie Number Caller</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🎟️ Housie Caller</h1>
+    <div id="status">Ready — press Start</div>
+
+    <div id="number" class="number">--</div>
+
+    <div class="controls">
+      <label>
+        Interval:
+        <select id="interval">
+          <option value="3">3 seconds</option>
+          <option value="5">5 seconds</option>
+          <option value="10">10 seconds</option>
+          <option value="15">15 seconds</option>
+          <option value="20">20 seconds</option>
+        </select>
+      </label>
+      <button id="start">▶ Start</button>
+      <button id="pause" disabled>⏸ Pause</button>
+      <button id="next">⏭ Next</button>
+      <button id="reset">↻ Reset</button>
+      <button id="voice">🔊 Voice: ON</button>
+    </div>
+
+    <div class="info">Called: <b id="count">0</b> / 90</div>
+
+    <div class="history-container">
+      <div class="history-title">📋 Call History (Recent First):</div>
+      <div id="history" class="history-list"></div>
+    </div>
+
+    <div id="board" class="board"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
