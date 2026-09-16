@@ -19,24 +19,27 @@ body {
 	margin: 0;
 	color: var(--ink);
 	background:
-		radial-gradient(circle at 10% 0%, rgba(228, 87, 46, .14), transparent 28rem),
-		linear-gradient(135deg, #f5f0e8 0%, #e8f1ef 100%);
+		radial-gradient(circle at 12% 8%, rgba(228, 87, 46, .2), transparent 24rem),
+		radial-gradient(circle at 92% 18%, rgba(18, 110, 114, .16), transparent 26rem),
+		linear-gradient(135deg, #f7f2e9 0%, #e4f0ee 100%);
 	font-family: "Trebuchet MS", Segoe UI, sans-serif;
 	text-align: center;
 }
 .container {
 	width: min(960px, 100%);
 	margin: auto;
-	padding: clamp(28px, 5vw, 58px) 18px 44px;
+	padding: clamp(30px, 6vw, 64px) 18px 50px;
 }
 
 h1 {
 	margin: 0;
-	color: var(--ink);
+	color: transparent;
 	font-family: Georgia, serif;
 	font-size: clamp(2.2rem, 6vw, 4.2rem);
 	line-height: 1.05;
 	letter-spacing: -.04em;
+	background: linear-gradient(110deg, var(--ink), var(--teal));
+	background-clip: text;
 }
 
 #status {
@@ -57,12 +60,17 @@ h1 {
 	border: 1px solid rgba(255, 255, 255, .8);
 	border-radius: 28px;
 	color: var(--paper);
-	background: var(--teal);
-	box-shadow: var(--shadow), inset 0 0 0 8px rgba(255, 255, 255, .08);
+	background: linear-gradient(145deg, #178387, var(--teal));
+	box-shadow: var(--shadow), inset 0 0 0 8px rgba(255, 255, 255, .08), inset 0 -18px 35px rgba(0, 0, 0, .08);
 	font-size: clamp(7rem, 22vw, 10rem);
 	font-weight: 900;
 	line-height: 1;
 	letter-spacing: -.08em;
+	transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.number:not(:empty) {
+	animation: reveal-number .35s ease both;
 }
 
 .controls {
@@ -70,8 +78,13 @@ h1 {
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	gap: 10px;
+	gap: 12px;
 	margin: 0 auto 18px;
+	padding: 12px;
+	border: 1px solid rgba(255, 255, 255, .8);
+	border-radius: 18px;
+	background: rgba(255, 255, 255, .48);
+	box-shadow: 0 10px 26px rgba(25, 35, 45, .06);
 }
 
 label {
@@ -85,15 +98,16 @@ label {
 
 button,
 select {
-	min-height: 46px;
+	min-height: 48px;
 	padding: 11px 16px;
 	border: 1px solid var(--line);
-	border-radius: 10px;
+	border-radius: 12px;
 	font: inherit;
 	font-size: .95rem;
 	font-weight: 700;
 	cursor: pointer;
 	transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+	touch-action: manipulation;
 }
 
 button {
@@ -156,7 +170,8 @@ select {
 	padding: 16px;
 	border: 1px solid var(--line);
 	border-radius: 16px;
-	background: rgba(255, 255, 255, .72);
+	background: rgba(255, 255, 255, .68);
+	backdrop-filter: blur(10px);
 	box-shadow: 0 8px 24px rgba(25, 35, 45, .06);
 	text-align: left;
 }
@@ -198,6 +213,8 @@ select {
 	gap: 6px;
 	max-width: 800px;
 	margin: 0 auto;
+	padding: 4px;
+	border-radius: 14px;
 }
 
 .cell {
@@ -212,6 +229,7 @@ select {
 	font-size: .9rem;
 	font-weight: 800;
 	transition: background .2s ease, color .2s ease, transform .2s ease;
+	user-select: none;
 }
 
 .cell.called {
@@ -223,7 +241,16 @@ select {
 
 @media (max-width: 640px) {
 	.container {
-		padding-top: 34px;
+		padding: 30px 12px 34px;
+	}
+
+	h1 {
+		font-size: clamp(2rem, 12vw, 3.2rem);
+	}
+
+	#status {
+		margin-bottom: 18px;
+		font-size: .9rem;
 	}
 
 	.number {
@@ -234,7 +261,8 @@ select {
 	.controls {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		width: min(100%, 420px);
+		width: min(100%, 440px);
+		padding: 10px;
 	}
 
 	label {
@@ -249,11 +277,12 @@ select {
 
 	.board {
 		grid-template-columns: repeat(9, minmax(0, 1fr));
-		gap: 4px;
+		gap: 5px;
 	}
 
 	.cell {
 		font-size: .75rem;
+		border-radius: 7px;
 	}
 }
 
@@ -272,5 +301,27 @@ select {
 
 	.cell {
 		font-size: .68rem;
+	}
+}
+
+@keyframes reveal-number {
+	from {
+		opacity: .55;
+		transform: scale(.96);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: .01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: .01ms !important;
 	}
 }
